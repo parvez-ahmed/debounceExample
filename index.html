@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <label>Without Debounce Example</label><br/>
+    <input type="text" id="withoutDebounce"/>
+    <hr/>
+    <label>With Debounce Example</label><br/>
+    <input type="text" id="withDebounce"/>
+    <script>
+        function search(e){
+            console.log("making search call ",e.target.value);
+        }
+        function withDebounce(func,limit){
+            let timmerId = null;
+            return (e)=>{
+                clearTimeout(timmerId)
+                timmerId = setTimeout(()=>{
+                    func(e);
+                },limit)
+            }
+        }
+        document.getElementById("withoutDebounce")
+        .addEventListener("keyup",search)
+        document.getElementById("withDebounce")
+        .addEventListener("keyup",withDebounce(search,500))
+    </script>
+</body>
+</html>
